@@ -21,6 +21,7 @@ async function run(){
 try{
 
   const serviceCollection = client.db("more").collection('collections');
+  const allbyers = client.db("more").collection('byers');
 
   app.get('/collections',async(req,res)=>{
 
@@ -28,6 +29,22 @@ try{
     const options = await serviceCollection.find(query).toArray();
     res.send(options);
   })
+
+  
+  app.get('/byers',async(req,res)=>{
+
+    const query = {};
+    const options = await allbyers.find(query).toArray();
+    res.send(options);
+  })
+
+  app.post('/collections', async(req, res)=>{
+    const newservice = req.body;
+    const result = await serviceCollection.insertOne(newservice);
+    res.send(result);
+})
+
+  
 
 }
 finally{
