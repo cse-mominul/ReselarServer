@@ -22,11 +22,18 @@ try{
 
   const serviceCollection = client.db("more").collection('collections');
   const allbyers = client.db("more").collection('byers');
+  const allproducts = client.db("more").collection('products');
 
   app.get('/collections',async(req,res)=>{
 
     const query = {};
     const options = await serviceCollection.find(query).toArray();
+    res.send(options);
+  })
+  app.get('/products',async(req,res)=>{
+
+    const query = {};
+    const options = await allproducts.find(query).toArray();
     res.send(options);
   })
 
